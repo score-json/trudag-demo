@@ -88,3 +88,4 @@ USER $USERNAME
 
 # Install trudag using pipx
 RUN pipx install trustable --index-url https://gitlab.com/api/v4/projects/66600816/packages/pypi/simple && \
+    pipx ensurepath
