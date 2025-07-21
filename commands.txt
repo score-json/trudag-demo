@@ -1,0 +1,59 @@
+# this commands fails, needed to add empty digraph in dotstop.dot
+trudag --init
+
+# setup part of trustable graph: prefix: TA, id/postfix: BEHAVIOURS, path: trudag
+# creates an empty item in TA-BEHAVIOURS.md in the trudag folder and adds an entry to the dotstop.dot
+trudag manage create-item TA BEHAVIOURS trudag
+
+# show item
+trudag manage show-item TA-BEHAVIOURS
+
+# check trustable graph for reviews and integrity
+trudag manage lint
+
+# After adding the body: Expected or required behaviours for JSON-Library are identified, specified, verified and validated based on analysis. 
+# linting fails
+trudag manage lint
+
+# Review item
+trudag manage set-item TA-BEHAVIOURS
+# Works now
+trudag manage lint
+
+# Add
+trudag manage create-item JLEX 01 trustable
+# Copy body: The JSON-Library provides a service to check the well-formedness of JSON data.
+trudag manage set-item JLEX-01
+trudag manage create-link TA-BEHAVIOURS JLEX-01
+
+# visualize the graph -> graph.svg (all item bodies need to be filled but not necessarily reviewed)
+trudag plot
+trudag manage lint #works
+
+# Add WFJ-01 under JLEX-01
+trudag manage create-item WFJ 01 trustable -p JLEX-01
+# Copy body: The service checks for the four primitive types (strings, numbers, booleans, null).
+trudag manage lint # fails
+trudag manage set-item WFJ-01
+trudag manage set-link JLEX-01 WFJ-01
+
+
+# Copy reference to WFJ-01 between ---
+references:
+    - type: "file"
+      path: test_primitive_types.py
+
+trudag manage lint -fails
+trudag manage set-item WFJ-01
+trudag manage set-link JLEX-01 WFJ-01
+
+trudag manage lint # works
+# change test file 
+
+
+
+# Not working yet: Add validators to WFJ-01 between ---
+evidence:
+    type: check_test_execution
+    configuration:
+        test_name: "test_primitive_types"
