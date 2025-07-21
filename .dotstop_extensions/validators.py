@@ -1,14 +1,15 @@
-import yaml
+from typing import TypeAlias
 
-def check_test_execution(configuration: dict[str, yaml]) -> tuple[float, list[Exception | Warning]]:
-    return (1.0, [])
+yaml: TypeAlias = str | int | float | list["yaml"] | dict[str, "yaml"]
+
+def check_test_results(configuration: dict[str, yaml]) -> tuple[float, list[Exception | Warning]]:
     test_name = configuration.get("test_name", None)
     
     if check_name_in_file(test_name, "passed_tests.txt"):
         score = 1.0
     else:
         score = 0.0
-    print(f"Test execution check for '{test_name}': {score}")
+    print(f"Test execution check for '{test_name}' assigns the score: {score}")
     return (score, [])
 
 

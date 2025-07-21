@@ -1,9 +1,0 @@
-digraph G {
-rankdir=TB;
-newrank=true;
-"TA-BEHAVIOURS" [label="TA-BEHAVIOURS: Expected or required\nbehaviours for JSON-Library are identified,\nspecified, verified and validated\nbased on analysis. ", URL="", target="_top", shape=box, fontname="Open Sans"];
-"JLEX-01" [label="JLEX-01: The JSON-Library provides\na service to check the well-formedness\nof JSON data. ", URL="", target="_top", shape=box, fontname="Open Sans"];
-"WFJ-01" [label="WFJ-01: The service checks for the\nfour primitive types (strings, numbers,\nbooleans, null). ", URL="", target="_top", shape=box, fontname="Open Sans"];
-"TA-BEHAVIOURS" -> "JLEX-01";
-"JLEX-01" -> "WFJ-01";
-}

@@ -1,1 +1,2 @@
-test_primitive_types
+json_test_suite
+json_roundtrip_test_suite
